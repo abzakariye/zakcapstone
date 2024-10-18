@@ -1,0 +1,35 @@
+<div class="orders-section">
+        <h2>Your Orders</h2>
+
+        <!-- If there are no orders -->
+        <div th:if="${orders.size() == 0}" class="no-orders">
+            <p>You have no orders yet.</p>
+        </div>
+
+        <!-- If there are orders -->
+        <table th:if="${orders.size() > 0}">
+            <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Order Date</th>
+                <th>Status</th>
+                <th>Total Amount</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order : ${orders}">
+                <td th:text="${order.id}"></td>
+                <td th:text="${#dates.format(order.orderDate, 'dd/MM/yyyy')}"></td>
+                <td>
+                    <span th:text="${order.status}" th:classappend="'status ' + order.status.toLowerCase()"></span>
+                </td>
+                <td th:text="${order.total}"></td>
+                <td>
+                    <button class="btn" th:onclick="'window.location.href=\'/order/details/' + ${order.id} + '\';'">View Details</button>
+                    <button class="btn" th:if="${order.status != 'Completed'}" th:onclick="'window.location.href=\'/order/cancel/' + ${order.id} + '\';'">Cancel Order</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>

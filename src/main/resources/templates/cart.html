@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scentra - Shopping Cart</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Global Styles */
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 2rem;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        /* Cart Table */
+        .cart-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        .cart-table thead {
+            background-color: #f8c471;
+        }
+
+        .cart-table th,
+        .cart-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-table th {
+            font-weight: bold;
+        }
+
+        .cart-table td img {
+            width: 100px;
+            border-radius: 10px;
+        }
+
+        .cart-table .quantity input {
+            width: 50px;
+            padding: 5px;
+            text-align: center;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .cart-table .remove-btn {
+            background-color: #e74c3c;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cart-table .remove-btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Cart Summary */
+        .cart-summary {
+            margin-top: 30px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .cart-summary h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cart-summary .total {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .cart-summary .checkout-btn {
+            padding: 15px 25px;
+            background-color: #f8c471;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cart-summary .checkout-btn:hover {
+            background-color: #e9ab4a;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        footer .about-text {
+            max-width: 600px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        footer .social-links {
+            margin-bottom: 20px;
+        }
+
+        footer .social-links a {
+            color: #fff;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        footer .links a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        footer .payment-options img {
+            width: 50px;
+            margin: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .cart-table td img {
+                width: 70px;
+            }
+
+            .cart-summary {
+                align-items: center;
+            }
+
+            .cart-summary .checkout-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="logo">Scentra</div>
+    <ul>
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/shop}">Shop</a></li>
+        <li><a th:href="@{/contactus}">Contact</a></li>
+        <li><a th:href="@{/cart}">Cart</a></li>
+        <li><a th:href="@{/login}">Login</a></li>
+    </ul>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+    <h1>Your Shopping Cart</h1>
+
+    <!-- Cart Table -->
+    <table class="cart-table">
+        <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody th:each="cartItem : ${cartItems}">
+        <tr>
+            <td>
+                <img th:src="@{${cartItem.product.imageUrl}}" alt="Product Image">
+                <p th:text="${cartItem.product.name}"></p>
+            </td>
+            <td th:text="${cartItem.product.price}"></td>
+            <td class="quantity">
+                <input type="number" th:value="${cartItem.quantity}" min="1" max="10">
+            </td>
+            <td th:text="${cartItem.totalPrice}"></td>
+            <td>
+                <button class="remove-btn" th:onclick="'removeItem(' + ${cartItem.product.id} + ')'">Remove</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Cart Summary -->
+    <div class="cart-summary">
+        <h2>Cart Summary</h2>
+        <p class="total">Total: <span th:text="${totalAmount}"></span></p>
+        <button class="checkout-btn" th:onclick="checkout()">Proceed to Checkout</button>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <!-- About Section -->
+        <div class="about-text">
+            <p>Scentra is your one-stop destination for luxurious fragrances. We offer a curated selection of top perfumes and colognes to help you make a lasting impression.</p>
+        </div>
+
+        <!-- Social Media Links -->
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i>Facebook</a>
+            <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+            <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
+        </div>
+
+        <!-- Privacy and Terms Links -->
+        <div class="links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+
+        <!-- Payment Options -->
+        <div class="payment-options">
+            <img src="/media/visa-10.svg" alt="Visa">
+            <img src="/media/stripe-3.svg" alt="Stripe">
+            <img src="/media/paypal-3.svg" alt="PayPal">
+        </div>
+    </div>
+
+    <p>&copy; 2024 Scentra. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

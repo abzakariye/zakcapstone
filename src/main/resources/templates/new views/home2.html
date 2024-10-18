@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scentra - Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 2rem;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        /* Header Section */
+        .header {
+            background: url('header-image.jpg') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            color: #fff;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .header button {
+            background-color: #f8c471;
+            padding: 10px 20px;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* Featured Section */
+        .featured {
+            padding: 50px;
+            background-color: #f4f4f4;
+        }
+
+        .featured h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .featured .product-grid {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .featured .product-grid .product {
+            background-color: #fff;
+            padding: 20px;
+            width: 30%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .featured .product img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Video Section */
+        .video-section {
+            padding: 50px;
+            background-color: #f8f9f9;
+            text-align: center;
+        }
+
+        .video-section iframe {
+            width: 80%;
+            height: 400px;
+            border: none;
+        }
+
+        /* Top Brands Section */
+        .top-brands {
+            padding: 50px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .top-brands h2 {
+            margin-bottom: 30px;
+        }
+
+        .brands-slider {
+            display: flex;
+            overflow: hidden;
+            justify-content: space-around;
+        }
+
+        .brands-slider img {
+            width: 100px;
+            height: auto;
+            animation: slide 10s infinite linear;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 50px;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        .contact h2 {
+            margin-bottom: 20px;
+        }
+
+        .contact p {
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer .payment-options img {
+            width: 50px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+    <div class="logo">Scentra</div>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- Header Section -->
+<section class="header">
+    <h1>Discover Your Signature Scent</h1>
+    <p>Find the perfect fragrance for every occasion.</p>
+    <button>Shop Now</button>
+</section>
+
+<!-- Featured Products Section -->
+<section class="featured">
+    <h2>Featured Products</h2>
+    <div class="product-grid">
+        <div class="product">
+            <img src="product1.jpg" alt="Product 1">
+            <p>Luxury Perfume</p>
+            <p>$99.99</p>
+        </div>
+        <div class="product">
+            <img src="product2.jpg" alt="Product 2">
+            <p>Exotic Fragrance</p>
+            <p>$89.99</p>
+        </div>
+        <div class="product">
+            <img src="product3.jpg" alt="Product 3">
+            <p>Classic Aroma</p>
+            <p>$79.99</p>
+        </div>
+    </div>
+</section>
+
+<!-- Video Section -->
+<section class="video-section">
+    <h2>Learn About Fragrances</h2>
+    <iframe src="https://www.youtube.com/embed/your-video-id" title="Fragrance Video"></iframe>
+</section>
+
+<!-- Top Brands Section -->
+<section class="top-brands">
+    <h2>Top Brands</h2>
+    <div class="brands-slider">
+        <img src="brand1-logo.png" alt="Brand 1">
+        <img src="brand2-logo.png" alt="Brand 2">
+        <img src="brand3-logo.png" alt="Brand 3">
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact">
+    <h2>Contact Us</h2>
+    <p>Have any questions? Reach out to us via email or phone.</p>
+    <p>Email: support@scentra.com | Phone: +123-456-7890</p>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 Scentra. All Rights Reserved.</p>
+    <div class="payment-options">
+        <img src="visa.png" alt="Visa">
+        <img src="mastercard.png" alt="Mastercard">
+        <img src="paypal.png" alt="PayPal">
+    </div>
+</footer>
+
+</body>
+</html>

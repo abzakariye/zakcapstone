@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fontawesome.com/v5/icons/font-awesome?f=brands&s=solid">
+    <title>Scentra - Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 2rem;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        /* Header Section */
+        .header {
+           /* background: url('hero-image.jpg') no-repeat center center/cover;*/
+            background: deepskyblue url("/media/hero-image.jpg") no-repeat fixed center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            color: #fff;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .header button {
+            background-color: #f8c471;
+            padding: 10px 20px;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* Featured Section */
+        .featured {
+            padding: 50px;
+            background-color: #f4f4f4;
+        }
+
+        .featured h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .featured .product-grid {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .featured .product-grid .product {
+            background-color: #fff;
+            padding: 10px;
+            width: 300px;
+            height: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .featured .product img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+
+        /* Video Section */
+        .video-section {
+            padding: 50px;
+            background-color: #f8f9f9;
+            text-align: center;
+        }
+
+        .video-section iframe {
+            width: 80%;
+            height: 400px;
+            border: none;
+        }
+
+        /* Top Brands Section */
+        .top-brands {
+            padding: 50px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .top-brands h2 {
+            margin-bottom: 30px;
+        }
+
+        .brands-slider {
+            display: flex;
+            overflow: hidden;
+            justify-content: space-around;
+        }
+
+        .brands-slider img {
+            width: 100px;
+            height: auto;
+            animation: slide 10s infinite linear;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 50px;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        .contact h2 {
+            margin-bottom: 20px;
+        }
+
+        .contact p {
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        footer .about-text {
+            max-width: 600px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        footer .social-links {
+            margin-bottom: 20px;
+        }
+
+        footer .social-links a {
+            color: #fff;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        footer .links {
+            margin-bottom: 20px;
+        }
+
+        footer .links a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        footer .payment-options img {
+            width: 50px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+    <div class="logo">Scentra</div>
+    <ul>
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/shop}">Shop</a></li>
+        <li><a th:href="@{/contactus}">Contact</a></li>
+        <li><a th:href="@{/cart}">Cart</a></li>
+        <li><a th:href="@{/login}">Login</a></li>
+    </ul>
+</nav>
+
+<!-- Header Section -->
+<section class="header">
+    <h1>Discover Your Signature Scent</h1>
+    <p>Find the perfect fragrance for every occasion.</p>
+    <button>Shop Now</button>
+</section>
+
+<!-- Featured Products Section -->
+<section class="featured">
+    <h2>Featured Products</h2>
+    <div class="product-grid">
+
+        <div class="product" th:each="product : ${featuredProducts}">
+            <img th:src="@{${product.productImageUrl}}" th:alt="${product.name}">
+            <p th:text="${product.name}" style="font-weight: bold"></p>
+            <p th:text="${product.description}"></p>
+            <p th:text=" '$' + ${product.price} + '0'"></p>
+            <p th:text="${product.volume} + 'mL'"></p>
+        </div>
+
+    </div>
+</section>
+
+<!-- Video Section -->
+<section class="video-section">
+    <h2>Learn About Fragrances</h2>
+    <iframe width="853" height="480" src="https://www.youtube.com/embed/jcjoIOwnxKA" title="#DAREINGRISDIOR WITH THE COLLECTIVE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <!--<iframe src="https://www.youtube.com/embed/your-video-id" title="Fragrance Video"></iframe> -->
+</section>
+
+<!-- Top Brands Section -->
+<section class="top-brands">
+    <h2>Top Brands</h2>
+    <div class="brands-slider">
+        <img src="/media/dior.svg" alt="Dior">
+        <img src="/media/gucci-group.svg" alt="Gucci">
+        <img src="/media/versace.svg" alt="Versace">
+        <img src="/media/chanel-2.svg" alt="Chanel">
+        <img src="/media/nivea-beaute.svg" alt="Nivea">
+
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact">
+    <h2>Contact Us</h2>
+    <p>Have any questions? Reach out to us via email or phone.</p>
+    <p>Email: support@scentra.com | Phone: +123-456-7890</p>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <!-- About Section -->
+        <div class="about-text">
+            <p>Scentra is your one-stop destination for luxurious fragrances. We offer a curated selection of top perfumes and colognes to help you make a lasting impression.</p>
+        </div>
+
+        <!-- Social Media Links -->
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i>Facebook</a>
+            <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+            <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
+        </div>
+
+        <!-- Privacy and Terms Links -->
+        <div class="links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+
+        <!-- Payment Options -->
+        <div class="payment-options" style="background-color: white">
+            <img src="/media/visa-10.svg" alt="Visa">
+            <img src="/media/stripe-3.svg" alt="Stripe">
+            <img src="/media/paypal-3.svg" alt="PayPal">
+        </div>
+    </div>
+
+    <p>&copy; 2024 Scentra. All Rights Reserved.</p>
+</footer>
+
+<!-- Add Font Awesome for Social Media Icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+</body>
+</html>

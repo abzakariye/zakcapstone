@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scentra - User Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+        }
+
+        .profile-section, .orders-section {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-section h2, .orders-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .profile-section p {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .orders-section table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .orders-section table thead {
+            background-color: #f8c471;
+            color: white;
+        }
+
+        .orders-section table thead th {
+            padding: 15px;
+            font-size: 1rem;
+        }
+
+        .orders-section table tbody td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            font-size: 1rem;
+        }
+
+        .orders-section table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .orders-section .btn {
+            padding: 10px 15px;
+            background-color: #f8c471;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .orders-section .btn:hover {
+            background-color: #e9ab4a;
+        }
+
+        .orders-section .status {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .orders-section .status.completed {
+            color: green;
+        }
+
+        .orders-section .status.pending {
+            color: orange;
+        }
+
+        .orders-section .status.canceled {
+            color: red;
+        }
+
+        .no-orders {
+            text-align: center;
+            color: #999;
+            font-size: 1.2rem;
+            padding: 50px 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Main Content -->
+<div class="container">
+    <h1>Welcome to Your Dashboard</h1>
+
+    <!-- Profile Section -->
+    <div class="profile-section">
+        <h2>Profile Information</h2>
+        <p><strong>Name:</strong> <span th:text="${user.firstName}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+    </div>
+
+    <!-- Orders Section -->
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product</title>
+</head>
+<body>
+
+<h1 th:text="${product != null && product.id != null ? 'Edit Product' : 'Create Product'}"></h1>
+
+<form action="#" th:action="@{/admin/products/save}" th:object="${product}" method="post" enctype="multipart/form-data">
+   <div>
+       <input type="hidden" th:field="*{id}" />
+   </div>
+    <div>
+        <label for="name">Product Name:</label>
+        <input type="text" id="name" th:field="*{name}" />
+    </div>
+    <div>
+        <label for="description">Description:</label>
+        <textarea id="description" th:field="*{description}"></textarea>
+    </div>
+    <div>
+        <label for="price">Price:</label>
+        <input type="number" id="price" th:field="*{price}" />
+    </div>
+
+    <div>
+        <label for="volume">Volume:</label>
+        <input type="number" id="volume" th:field="*{volume}" />
+    </div>
+
+    <div>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" th:field="*{quantity}" />
+    </div>
+
+    <div>
+        <label for="productImage">Upload Product Image:</label>
+        <input type="file" id="productImage" name="productImage" />
+    </div>
+
+    <div>
+        <label for="isFeatured">Is Product Featured </label>
+        <select th:field="*{isFeatured}" id="isFeatured" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="category">Select product category</label>
+        <select th:field="*{category.id}" id="category" required>
+            <option th:each="category: ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+        </select>
+    </div>
+
+   <!-- <div>
+        <label for="isFeatured">Featured Product:</label>
+        <input type="checkbox" id="isFeatured" th:field="*{isFeatured}" />
+    </div> -->
+    <div>
+        <button type="submit">Save Product</button>
+    </div>
+</form>
+
+<a th:href="@{/static}">Index</a>
+
+
+</body>
+</html>

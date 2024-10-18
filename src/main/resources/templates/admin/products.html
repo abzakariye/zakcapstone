@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scentra - Product Catalog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #333;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar .logo {
+            font-size: 1.8rem;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            color: #f8c471;
+        }
+
+        /* Main Dashboard */
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        /* Top Navbar */
+        .top-navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8c471;
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            padding: 20px 0;
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <div class="logo">Scentra</div>
+    <a th:href="@{/}">Home</a>
+    <a th:href="@{/admin/dashboard}">Dashboard</a>
+    <a th:href="@{/admin/categories}">Manage Categories</a>
+    <a th:href="@{/admin/products}">Manage Products</a>
+    <a th:href="@{/admin/orders}">Manage Orders</a>
+    <a th:href="@{/logout}">Logout</a>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+    <!-- Top Navbar -->
+    <div class="top-navbar">
+        <div class="welcome-text">
+            <h1>Product Catalog</h1>
+        </div>
+        <div class="actions">
+            <a th:href="@{/admin/products/new}" style="padding: 10px 20px; background-color: #f8c471; color: #fff; text-decoration: none; border-radius: 5px;">Create Product</a>
+        </div>
+    </div>
+
+    <!-- Product Table -->
+    <section>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Loop through all products -->
+            <tr th:each="product : ${products}">
+                <td th:text="${product.id}">1</td>
+                <td th:text="${product.name}">Product Name</td>
+                <td th:text="${product.price}">$100</td>
+                <td>
+                    <img th:src="@{${product.productImageUrl}}" th:alt="${product.name}" width="50px" height="50px"/>
+                </td>
+                <td>
+                    <a th:href="@{/admin/products/edit_product/{id}(id=${product.id})}">Edit</a>
+                    <a th:href="@{/admin/products/delete_product/{id}(id=${product.id})}">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Scentra. All rights reserved.</p>
+    </footer>
+</div>
+
+</body>
+</html>

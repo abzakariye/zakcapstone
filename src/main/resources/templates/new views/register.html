@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scentra - Sign Up</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 2rem;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        /* Sign Up Form Section */
+        .signup-container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('signup-background.jpg') no-repeat center center/cover;
+        }
+
+        .signup-form {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .signup-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .signup-form label {
+            display: block;
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .signup-form input[type="text"],
+        .signup-form input[type="email"],
+        .signup-form input[type="password"],
+        .signup-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .signup-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #f8c471;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .signup-form button:hover {
+            background-color: #e67e22;
+        }
+
+        .signup-form .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .signup-form .login-link a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .signup-form .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer .footer-content {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        footer .footer-content a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer .social-links a {
+            font-size: 1.5rem;
+            margin: 0 10px;
+            color: #fff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .signup-form {
+                padding: 20px;
+            }
+
+            footer .footer-content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            footer .social-links {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+    <div class="logo">Scentra</div>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- Sign Up Form Section -->
+<section class="signup-container">
+    <form class="signup-form" th:action="@{/register}" th:object="${user}" method="post">
+        <h2>Create Your Account</h2>
+
+        <label for="first_name">First Name</label>
+        <input type="text" id="first_name" th:field="*{firstName}" required />
+
+        <label for="last_name">Last Name</label>
+        <input type="text" id="last_name" th:field="*{lastName}" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" th:field="*{email}" required />
+
+        <label for="password">Password</label>
+        <input type="password" id="password" th:field="*{password}" required />
+
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" th:field="*{phone}" required />
+
+        <label for="address">Address</label>
+        <input type="text" id="address" th:field="*{address}" required />
+
+        <label for="city">City</label>
+        <input type="text" id="city" th:field="*{city}" required />
+
+        <label for="state">State</label>
+        <input type="text" id="state" th:field="*{state}" required />
+
+        <label for="zip">Zip</label>
+        <input type="text" id="zip" th:field="*{zip}" required />
+
+        <label for="role">Role</label>
+        <select id="role" th:field="*{role}">
+            <option value="USER">User</option>
+            <option value="ADMIN">Admin</option>
+        </select>
+
+        <button type="submit">Register</button>
+
+        <div class="login-link">
+            <p>Already have an account? <a href="/login">Login</a></p>
+        </div>
+    </form>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="about-text">
+            <p>&copy; 2024 Scentra. All Rights Reserved.</p>
+        </div>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i>Facebook</a>
+            <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+            <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Add Font Awesome for Social Media Icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+</body>
+</html>

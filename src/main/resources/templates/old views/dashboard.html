@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <title>Thymeleaf Example</title>
+</head>
+<body>
+<h1>Admin Dashboard</h1>
+
+<div>
+    <span th:text="${message}"></span>
+    <!-- Show this link only if the user is authenticated -->
+    <a sec:authorize="isAuthenticated()" href="/logout">  Logout</a>
+</div>
+<br>
+<a th:href="@{/static}">Index</a>
+
+<br>
+<p>########## Categories ############</p>
+
+
+<a th:href="@{/admin/categories/new_category}">Create Category</a>
+
+<br>
+
+<a th:href="@{/admin/categories}">Show Categories</a>
+
+<p>########## Products ############</p>
+<a th:href="@{/admin/products/new}">Create Product</a>
+
+<br>
+
+<a th:href="@{/admin/products}">Show products</a>
+
+<img src="/product-images/hero-image.jpg">
+
+</body>
+</html>

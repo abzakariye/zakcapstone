@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scentra - Shop</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Global Styles */
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+        }
+
+        /* Navbar */
+       /* .navbar {
+            background-color: #333;
+            padding: 15px;
+            color: white;
+            text-align: center;
+        }
+
+        .navbar .logo {
+            font-size: 2rem;
+            font-family: 'Georgia', serif;
+        }*/
+
+        /* Navbar */
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 2rem;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card img {
+            width: 100%;
+            border-radius: 10px;
+            max-height: 300px;
+            object-fit: cover;
+        }
+
+        .product-card h2 {
+            font-size: 1.5rem;
+            margin: 15px 0 10px;
+        }
+
+        .product-card p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .product-card .price {
+            font-weight: bold;
+            font-size: 1.3rem;
+            color: #333;
+        }
+
+        .product-card .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #f8c471;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .product-card .btn:hover {
+            background-color: #e9ab4a;
+        }
+
+        /* Footer
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer .payment-options img {
+            width: 40px;
+            margin: 0 10px;
+        }*/
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        footer .about-text {
+            max-width: 600px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        footer .social-links {
+            margin-bottom: 20px;
+        }
+
+        footer .social-links a {
+            color: #fff;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        footer .links {
+            margin-bottom: 20px;
+        }
+
+        footer .links a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        footer .payment-options img {
+            width: 50px;
+            margin: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                text-align: center;
+                padding: 10px;
+            }
+
+            .product-card img {
+                max-height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="logo">Scentra</div>
+    <ul>
+        <li><a th:href="@{/static}">Home</a></li>
+        <li><a th:href="@{/shop}">Shop</a></li>
+        <li><a th:href="@{/contact}">Contact</a></li>
+        <li><a th:href="@{/login}">Login</a></li>
+    </ul>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+    <h1>Explore Our Collection</h1>
+
+    <div class="product-grid">
+        <!-- Sample Product -->
+        <div class="product-card" th:each="product : ${products}">
+            <img th:src="@{${product.productImageUrl}}" alt="Product Image">
+            <h2 th:text="${product.name}"></h2>
+            <p th:text="${product.description}"></p>
+            <div class="price" th:text="${product.price}"></div>
+            <a href="#" class="btn">Add to Cart</a>
+        </div>
+
+        <!-- Repeat for other products -->
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <!-- About Section -->
+        <div class="about-text">
+            <p>Scentra is your one-stop destination for luxurious fragrances. We offer a curated selection of top perfumes and colognes to help you make a lasting impression.</p>
+        </div>
+
+        <!-- Social Media Links -->
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i>Facebook</a>
+            <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+            <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
+        </div>
+
+        <!-- Privacy and Terms Links -->
+        <div class="links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+
+        <!-- Payment Options -->
+        <div class="payment-options" style="background-color: white">
+            <img src="/media/visa-10.svg" alt="Visa">
+            <img src="/media/stripe-3.svg" alt="Stripe">
+            <img src="/media/paypal-3.svg" alt="PayPal">
+        </div>
+    </div>
+
+    <p>&copy; 2024 Scentra. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

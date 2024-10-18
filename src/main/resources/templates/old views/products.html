@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Scentra - Product Catalog</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<header>
+    <nav>
+        <a href="/static">Home</a>
+        <a href="/products">Shop</a>
+        <a href="/about">About Us</a>
+        <a href="/contact">Contact</a>
+        <a href="/cart">Cart</a>
+        <a href="/login">Login</a>
+    </nav>
+</header>
+<p>########## Products ############</p>
+<a th:href="@{/admin/products/new}">Create Product</a>
+
+<br>
+<section>
+    <h2>Product Catalog</h2>
+    <form action="#" method="get">
+        <label for="sort">Sort by:</label>
+        <select id="sort" name="sort">
+            <option value="price">Price</option>
+            <option value="popularity">Popularity</option>
+        </select>
+        <button type="submit">Sort</button>
+    </form>
+
+    <div class="product-grid">
+        <!-- Loop through all products -->
+        <div class="product-item" th:each="product : ${products}">
+            <img th:src="@{${product.productImageUrl}}" th:alt="${product.name}" width="350px" height="350px"/>
+            <h3 th:text="${product.name}">Product Name</h3>
+            <p th:text="${product.price}">$100</p>
+            <a th:href="@{/products/{id}(id=${product.id})}">View Product</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 Scentra. All rights reserved.</p>
+</footer>
+</body>
+</html>

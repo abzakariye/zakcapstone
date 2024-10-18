@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Categories List</title>
+</head>
+<body>
+<h1>Categories List</h1>
+<a th:href="@{/admin/categories/new_category}">Create Category</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Thymeleaf loop goes here -->
+    <tr th:each="category : ${categories}">
+        <td th:text="${category.id}">Category ID</td>
+        <td th:text="${category.name}">Category Name</td>
+        <td th:text="${category.description}">Category Description</td>
+        <td>
+            <a th:href="@{/admin/categories/edit_category/{id} (id=${category.id})}">Edit</a>
+            <a th:href="@{/admin/categories/delete_category/{id} (id=${category.id})}">Delete</a>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

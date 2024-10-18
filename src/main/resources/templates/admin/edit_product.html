@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scentra - Edit Product</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #333;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar .logo {
+            font-size: 1.8rem;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            color: #f8c471;
+        }
+
+        /* Main Dashboard */
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        /* Form Styles */
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="file"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        img {
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #f8c471;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #e9ab4a;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            padding: 20px 0;
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <div class="logo">Scentra</div>
+    <a th:href="@{/}">Home</a>
+    <a th:href="@{/admin/dashboard}">Dashboard</a>
+    <a th:href="@{/admin/categories}">Manage Categories</a>
+    <a th:href="@{/admin/products}">Manage Products</a>
+    <a th:href="@{/admin/orders}">Manage Orders</a>
+    <a th:href="@{/logout}">Logout</a>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+    <h1>Edit Product</h1>
+
+    <form  th:action="@{/admin/products/edit}" th:object="${product}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:field="*{id}" />
+        <label for="name">Product Name:</label>
+        <input type="text" id="name" th:field="*{name}" required>
+
+        <label for="description">Description:</label>
+        <textarea id="description" th:field="*{description}" required></textarea>
+
+        <label for="price">Price:</label>
+        <input type="number" id="price" th:field="*{price}" required>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" th:field="*{quantity}" required>
+
+        <!-- Display current product image -->
+        <div>
+            <label>Current Product Image:</label>
+            <div>
+                <img th:src="@{${product.productImageUrl}}" alt="Product Image" width="200">
+            </div>
+        </div>
+
+        <!-- Option to upload new image -->
+        <label for="imageFile">New Product Image (Optional):</label>
+        <input type="file" id="imageFile" name="imageFile">
+
+        <button type="submit">Update Product</button>
+    </form>
+
+    <footer>
+        <p>&copy; 2024 Scentra. All rights reserved.</p>
+    </footer>
+</div>
+
+</body>
+</html>

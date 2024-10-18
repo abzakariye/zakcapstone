@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Scentra</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 2rem;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+        }
+
+        .contact-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .contact-info {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .contact-info h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .contact-form {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .contact-form h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .contact-form button {
+            padding: 15px;
+            background-color: #f8c471;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .contact-form button:hover {
+            background-color: #e9ab4a;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        footer .about-text {
+            max-width: 600px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        footer .social-links {
+            margin-bottom: 20px;
+        }
+
+        footer .social-links a {
+            color: #fff;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        footer .links {
+            margin-bottom: 20px;
+        }
+
+        footer .links a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        footer .payment-options img {
+            width: 50px;
+            margin: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-wrapper {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+    <div class="logo">Scentra</div>
+    <ul>
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/shop}">Shop</a></li>
+        <li><a th:href="@{/contactus}">Contact</a></li>
+        <li><a th:href="@{/cart}">Cart</a></li>
+        <li><a th:href="@{/login}">Login</a></li>
+    </ul>
+</nav>
+
+<!-- Main Container -->
+<div class="container">
+    <h1>Contact Us</h1>
+
+    <!-- Contact Section -->
+    <div class="contact-wrapper">
+        <!-- Contact Information -->
+        <div class="contact-info">
+            <h2>Our Contact Information</h2>
+            <p><strong>Phone:</strong> +1 (800) 123-4567</p>
+            <p><strong>Email:</strong> support@scentra.com</p>
+            <p><strong>Address:</strong> 123 Fragrance Avenue, Perfume City, SC 12345</p>
+            <p>Feel free to reach out to us with any questions or concerns. Our support team is available 24/7 to assist you!</p>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+            <h2>Send Us a Message</h2>
+            <form>
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <input type="tel" placeholder="Your Phone Number (optional)">
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <!-- About Section -->
+        <div class="about-text">
+            <p>Scentra is your one-stop destination for luxurious fragrances. We offer a curated selection of top perfumes and colognes to help you make a lasting impression.</p>
+        </div>
+
+        <!-- Social Media Links -->
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i>Facebook</a>
+            <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+            <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
+        </div>
+
+        <!-- Privacy and Terms Links -->
+        <div class="links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+
+        <!-- Payment Options -->
+        <div class="payment-options" style="background-color: white">
+            <img src="/media/visa-10.svg" alt="Visa">
+            <img src="/media/stripe-3.svg" alt="Stripe">
+            <img src="/media/paypal-3.svg" alt="PayPal">
+        </div>
+    </div>
+
+    <p>&copy; 2024 Scentra. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

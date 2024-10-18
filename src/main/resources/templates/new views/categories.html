@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Categories</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #333;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar .logo {
+            font-size: 1.8rem;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            color: #f8c471;
+        }
+
+        /* Main Dashboard */
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .top-navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .top-navbar .welcome-text {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .top-navbar .profile {
+            font-size: 1.2rem;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            margin-top: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8c471;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f4f4f4;
+        }
+
+        a.action-link {
+            text-decoration: none;
+            color: #333;
+            margin-right: 10px;
+        }
+
+        a.action-link:hover {
+            color: #f8c471;
+        }
+
+        /* Button for Create Category */
+        .create-category {
+            display: inline-block;
+            background-color: #f8c471;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            margin-top: 20px;
+        }
+
+        .create-category:hover {
+            background-color: #e67e22;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <div class="logo">Scentra</div>
+    <a href="#">Dashboard</a>
+    <a href="#">Manage Categories</a>
+    <a href="#">Manage Products</a>
+    <a href="#">Manage Orders</a>
+    <a href="#">Logout</a>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+    <!-- Top Navbar -->
+    <div class="top-navbar">
+        <div class="welcome-text">Manage Categories</div>
+        <div class="profile">
+            <a href="#">Profile</a>
+        </div>
+    </div>
+
+    <!-- Category List and Create Button -->
+    <div class="table-container">
+        <h2>Categories List</h2>
+        <a th:href="@{/admin/categories/new_category}" class="create-category">Create Category</a>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Thymeleaf loop goes here -->
+            <tr th:each="category : ${categories}">
+                <td th:text="${category.id}">Category ID</td>
+                <td th:text="${category.name}">Category Name</td>
+                <td th:text="${category.description}">Category Description</td>
+                <td>
+                    <a th:href="@{/admin/categories/edit_category/{id} (id=${category.id})}" class="action-link">Edit</a>
+                    <a th:href="@{/admin/categories/delete_category/{id} (id=${category.id})}" class="action-link">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

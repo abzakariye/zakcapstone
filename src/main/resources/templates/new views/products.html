@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scentra - Product Catalog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #333;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar .logo {
+            font-size: 1.8rem;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            color: #f8c471;
+        }
+
+        /* Main Dashboard */
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .top-navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Product Catalog */
+        section {
+            margin-top: 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .product-item {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            flex: 1 1 calc(33.333% - 20px);
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+
+        .product-item:hover {
+            transform: translateY(-5px);
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Sort Form */
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            padding: 20px 0;
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <div class="logo">Scentra</div>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/categories">Manage Categories</a>
+    <a href="/admin/products">Manage Products</a>
+    <a href="/admin/orders">Manage Orders</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+    <!-- Top Navbar -->
+    <div class="top-navbar">
+        <div class="welcome-text">
+            <h1>Product Catalog</h1>
+        </div>
+        <div class="actions">
+            <a th:href="@{/admin/products/new}" style="padding: 10px 20px; background-color: #f8c471; color: #fff; text-decoration: none; border-radius: 5px;">Create Product</a>
+        </div>
+    </div>
+
+    <!-- Product Sorting and Display -->
+    <section>
+        <form action="#" method="get">
+            <label for="sort">Sort by:</label>
+            <select id="sort" name="sort">
+                <option value="price">Price</option>
+                <option value="popularity">Popularity</option>
+            </select>
+            <button type="submit">Sort</button>
+        </form>
+
+        <div class="product-grid">
+            <!-- Loop through all products -->
+            <div class="product-item" th:each="product : ${products}">
+                <img th:src="@{${product.productImageUrl}}" th:alt="${product.name}" />
+                <h3 th:text="${product.name}">Product Name</h3>
+                <p th:text="${product.price}">$100</p>
+                <a th:href="@{/products/{id}(id=${product.id})}">View Product</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Scentra. All rights reserved.</p>
+    </footer>
+</div>
+
+</body>
+</html>
